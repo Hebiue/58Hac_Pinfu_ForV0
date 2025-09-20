@@ -10,9 +10,9 @@
 # production
 /build
 
-/app/api/gemini-api-v2/node_modules/
-/app/api/gemini-api-v2/package-lock.json
-/app/api/gemini-api-v2/config.json
+/app/api/gemini/node_modules/
+/app/api/gemini/package-lock.json
+/app/api/gemini/config.json
 
 # debug
 npm-debug.log*

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
-import { Chat } from "@/app/api/gemini-api-v2/src/geminiChat"
+import { Chat } from "@/app/api/gemini/geminiChat"
 
 async function ask(inputText: string) {
     const chat = new Chat();
