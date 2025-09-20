@@ -7,49 +7,34 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
-import { Chat } from "@/app/api/gemini/geminiChat"
+import {Chat, Target} from "@/app/api/gemini/geminiChat"
 
-async function ask(inputText: string) {
+async function ask(formData: Target) {
     const chat = new Chat();
-    return await chat.ask(inputText);
+    return await chat.ask(formData);
 }
 
-export function PraiseForm() {
-  const [formData, setFormData] = useState({
-    age: "",
-    gender: "",
-    relationship: "",
-    other: "",
-  })
-  const [result, setResult] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+export function TextPraiseForm() {
+  const [formData, setFormData] = useState<Target>({
+      age: "",
+      gender: "",
+      relationship: "",
+      other: ""
+  });
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      setResult(await ask(`あなたは人を褒めることに特化したAIアシスタントです。以下の情報を基に、心のこもった自然な褒め言葉を日本語で生成してください。
-
-対象者の情報:
-- 年齢: ${formData.age || "不明"}
-- 性別: ${formData.gender || "不明"}
-- 関係性: ${formData.relationship || "不明"}
-- その他の特徴: ${formData.other || "特になし"}
-
-以下の点を考慮して褒め言葉を作成してください:
-1. 相手との関係性に適した敬語レベルを使用
-2. 具体的で心に響く表現を使用
-3. 相手の特徴を活かした個人的な褒め言葉
-4. 自然で温かみのある文章
-5. 200文字程度で簡潔に
-
-褒め言葉のみを返答してください。`) || "褒め言葉を生成できませんでした")
+      setResult(await ask(formData) || "褒め言葉を生成できませんでした");
     } catch (error) {
-      console.error("Error:", error)
-      setResult("エラーが発生しました")
+      console.error("Error:", error);
+      setResult("エラーが発生しました");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
