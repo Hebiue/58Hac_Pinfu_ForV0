@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import {ask, Target} from "@/lib/gemini"
 import {useDropzone} from "react-dropzone";
+import {Textarea} from "@/components/ui/textarea";
 
 export function PraiseForm() {
     const [formData, setFormData] = useState<Target>({
@@ -222,6 +223,19 @@ export function PraiseForm() {
                                   }
                                   placeholder="例: サラリーマン、中学生など"
                                   className="bg-gray-100 border-gray-200 focus:border-gray-400"
+                              />
+                          </div>
+
+                          <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                  その他
+                              </label>
+                              <Textarea
+                                  value={formData.other}
+                                  onChange={(e) =>
+                                      setFormData({ ...formData, other: e.target.value })
+                                  }
+                                  className="bg-gray-100 border-gray-200 focus:border-gray-400 min-h-[100px]"
                               />
                           </div>
 
