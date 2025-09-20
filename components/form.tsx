@@ -1,46 +1,69 @@
 "use client"
 
-import type React from "react"
-
 import Image from "next/image"
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import {ask, Target} from "@/lib/gemini"
+import {useDropzone} from "react-dropzone";
 
-export function TextPraiseForm() {
-  const [formData, setFormData] = useState<Target>({
-      age: "",
-      gender: "",
-      relationship: "",
-      motivation: "",
-      hobby: "",
-      distance: "",
-      character: "",
-      worksornot: "",
-      position: "",
-      other: ""
-  });
-  const [result, setResult] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+export function PraiseForm() {
+    const [formData, setFormData] = useState<Target>({
+        age: "",
+        gender: "",
+        relationship: "",
+        motivation: "",
+        hobby: "",
+        distance: "",
+        character: "",
+        worksornot: "",
+        position: "",
+        other: ""
+    });
+    const [result, setResult] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [imageFiles, setImageFiles] = useState<File[]>([])
+    const [previewUrls, setPreviewUrls] = useState<string[]>([])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setIsLoading(true);
-    try {
-      setResult(await ask(formData) || "褒め言葉を生成できませんでした");
-    } catch (error) {
-      console.error("Error:", error);
-      setResult("エラーが発生しました");
-    } finally {
-      setIsLoading(false);
+    const onDrop = (acceptedFiles: File[]) => {
+        setImageFiles((prev) => [...prev, ...acceptedFiles])
+        setResult("")
     }
-  }
 
-  return (
+    useEffect(() => {
+        const urls = imageFiles.map((file) => URL.createObjectURL(file))
+        setPreviewUrls(urls)
+        return () => urls.forEach((url) => URL.revokeObjectURL(url))
+    }, [imageFiles])
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+
+        setIsLoading(true)
+        try {
+            setResult(await ask(formData, imageFiles))
+        } catch (error) {
+            console.error("Error:", error)
+            setResult("エラーが発生しました")
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const handleReset = () => {
+        setImageFiles([])
+        setPreviewUrls([])
+        setResult("")
+    }
+
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+        onDrop,
+        accept: {"image/*": []},
+        multiple: true,
+    })
+
+    return (
       <div className="min-h-screen bg-gray-50 py-8 px-4">
           <div className="max-w-2xl mx-auto">
               {/* Header */}
@@ -202,19 +225,51 @@ export function TextPraiseForm() {
                               />
                           </div>
 
-                          {/*その他欄に例はいらない*/}
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                              画像
+                          </label>
+                          <div
+                              {...getRootProps()}
+                              className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${
+                                  isDragActive ? "border-green-400 bg-green-50" : "border-gray-300 bg-white"
+                              }`}
+                          >
+                              <input {...getInputProps()} />
+                              <p className="text-gray-700">
+                                  ここに画像をドラッグ＆ドロップ、またはクリックして選択（複数枚可）
+                              </p>
+                              {imageFiles.length > 0 && (
+                                  <p className="mt-2 text-sm text-green-600">
+                                      現在の画像: {imageFiles.length}枚
+                                  </p>
+                              )}
+                          </div>
 
-                          <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
-                                  その他
-                              </label>
-                              <Textarea
-                                  value={formData.other}
-                                  onChange={(e) =>
-                                      setFormData({ ...formData, other: e.target.value })
-                                  }
-                                  className="bg-gray-100 border-gray-200 focus:border-gray-400 min-h-[100px]"
-                              />
+                          {/* Image Previews */}
+                          {previewUrls.length > 0 && (
+                              <div className="mt-4 max-h-[400px] overflow-y-auto border border-gray-200 rounded-lg p-2">
+                                  <div className="flex flex-col gap-y-4">
+                                      {previewUrls.map((url, idx) => (
+                                          <img
+                                              key={idx}
+                                              src={url}
+                                              alt={`プレビュー ${idx + 1}`}
+                                              className="w-full max-w-sm mx-auto rounded shadow"
+                                          />
+                                      ))}
+                                  </div>
+                              </div>
+                          )}
+
+                          <div className="flex gap-4 mt-4">
+                              <Button
+                                  type="button"
+                                  className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 text-lg"
+                                  onClick={handleReset}
+                                  disabled={isLoading}
+                              >
+                                  画像をリセット
+                              </Button>
                           </div>
                           {/*ここまで */}
 
@@ -252,5 +307,5 @@ export function TextPraiseForm() {
               </div>
           </div>
       </div>
-  )
+    )
 }
