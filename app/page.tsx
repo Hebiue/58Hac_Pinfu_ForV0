@@ -1,5 +1,4 @@
 import { PraiseForm } from "@/components/praise-form"
-import { ChatInterface } from "@/components/chat-interface"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function Home() {
@@ -11,17 +10,9 @@ export default function Home() {
             <TabsTrigger value="praise" className="text-lg">
               ほめちゃる
             </TabsTrigger>
-            <TabsTrigger value="chat" className="text-lg">
-              AIチャット
-            </TabsTrigger>
           </TabsList>
-
           <TabsContent value="praise">
             <PraiseForm />
-          </TabsContent>
-
-          <TabsContent value="chat">
-            <ChatInterface />
           </TabsContent>
         </Tabs>
       </div>
