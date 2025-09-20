@@ -3,7 +3,7 @@ import { config } from "./config";
 
 export class Chat {
     private chatSession: ReturnType<typeof this.model.startChat>;
-    private model = genAI.getGenerativeModel({ model: config.model });
+    private model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     constructor() {
         this.chatSession = this.model.startChat();
