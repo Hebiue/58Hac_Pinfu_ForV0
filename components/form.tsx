@@ -137,7 +137,6 @@ export function PraiseForm() {
                                   className="bg-gray-100 border-gray-200 focus:border-gray-400"
                               />
                           </div>
-                          {/*追加入力欄ここから*/}
 
                           <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
