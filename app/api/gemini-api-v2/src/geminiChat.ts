@@ -1,5 +1,4 @@
 import { genAI } from "./geminiClient";
-import { config } from "./config";
 
 export class Chat {
     private chatSession: ReturnType<typeof this.model.startChat>;
