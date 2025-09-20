@@ -51,7 +51,7 @@ export class Chat {
         2. 外見や雰囲気に基づいた具体的な褒め言葉
         3. 200文字程度で簡潔に
         
-        褒め言葉のみを返答してください。`
+        褒め言葉のみを返答し、事実であるかどうかわからないことに関して言及しないでください。。`
 
         const result = await this.model.generateContent([prompt, imagePart]);
         return result.response.text();
