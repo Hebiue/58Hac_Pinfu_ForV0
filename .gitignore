@@ -10,10 +10,6 @@
 # production
 /build
 
-/app/api/gemini/node_modules/
-/app/api/gemini/package-lock.json
-/app/api/gemini/config.json
-
 # debug
 npm-debug.log*
 yarn-debug.log*
