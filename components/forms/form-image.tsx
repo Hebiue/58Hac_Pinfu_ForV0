@@ -5,12 +5,7 @@ import {useState, useEffect} from "react"
 import {useDropzone} from "react-dropzone"
 import {Button} from "@/components/ui/button"
 import {Card, CardContent} from "@/components/ui/card"
-import {Chat} from "@/app/api/gemini/route"
-
-async function askWithImage(file: File) {
-    const chat = new Chat();
-    return await chat.askWithImage(file);
-}
+import {askWithImage} from "@/lib/gemini";
 
 export function ImagePraiseForm() {
     const [imageFile, setImageFile] = useState<File | null>(null);

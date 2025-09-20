@@ -7,12 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
-import {Chat, Target} from "@/app/api/gemini/route"
-
-async function ask(formData: Target) {
-    const chat = new Chat();
-    return await chat.ask(formData);
-}
+import {ask, Target} from "@/lib/gemini"
 
 export function TextPraiseForm() {
   const [formData, setFormData] = useState<Target>({
