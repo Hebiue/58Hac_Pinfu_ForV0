@@ -1,42 +1,42 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
-import { useDropzone } from "react-dropzone"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Chat } from "@/app/api/gemini/geminiChat"
+import {useState, useEffect} from "react"
+import {useDropzone} from "react-dropzone"
+import {Button} from "@/components/ui/button"
+import {Card, CardContent} from "@/components/ui/card"
+import {Chat} from "@/app/api/gemini/geminiChat"
 
 async function askWithImage(file: File) {
-    const chat = new Chat()
-    return await chat.askWithImage(file)
+    const chat = new Chat();
+    return await chat.askWithImage(file);
 }
 
 export function ImagePraiseForm() {
-    const [imageFile, setImageFile] = useState<File | null>(null)
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-    const [result, setResult] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [result, setResult] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const onDrop = (acceptedFiles: File[]) => {
-        const file = acceptedFiles[0]
-        setImageFile(file)
-        setResult("")
+        const file = acceptedFiles[0];
+        setImageFile(file);
+        setResult("");
     }
 
     useEffect(() => {
         if (imageFile) {
-            const url = URL.createObjectURL(imageFile)
-            setPreviewUrl(url)
-            return () => URL.revokeObjectURL(url)
+            const url = URL.createObjectURL(imageFile);
+            setPreviewUrl(url);
+            return () => URL.revokeObjectURL(url);
         }
-    }, [imageFile])
+    }, [imageFile]);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
         onDrop,
-        accept: { "image/*": [] },
+        accept: {"image/*": []},
         multiple: false,
-    })
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -52,14 +52,14 @@ export function ImagePraiseForm() {
         } finally {
             setIsLoading(false)
         }
-    }
+    };
 
     return (
         <div className="min-h-screen bg-gray-50 py-8 px-4">
             <div className="max-w-2xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <h1 className="text-2xl font-bold text-gray-900 mb-2">写真から褒め言葉を生成？　おまかせください</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-2">写真から褒め言葉を生成？ おまかせください</h1>
                 </div>
 
                 {/* Main Title */}
@@ -127,7 +127,7 @@ export function ImagePraiseForm() {
                 <div className="text-center mt-8 text-sm text-gray-600 leading-relaxed">
                     <p>
                         ほめちゃる（画像版）は、写真に写った人物の雰囲気や特徴をもとに、自然で温かみのある褒め言葉を生成します。
-                        <br />
+                        <br/>
                         顔がはっきり写っている画像を使うと、より具体的な褒め言葉になります。
                     </p>
                 </div>
