@@ -5,6 +5,12 @@ export interface Target {
     age: string;
     gender: string;
     relationship: string;
+    motivation: string;
+    hobby: string;
+    distance: string;
+    character: string;
+    worksornot: string;
+    position: string;
     other: string;
 }
 
@@ -14,10 +20,15 @@ const model = genAI.getGenerativeModel({model: getEnvConfig().model});
 export async function ask(formData: Target): Promise<string> {
     const prompt = `あなたは人を褒めることに特化したAIアシスタントです。以下の情報を基に、心のこもった自然な褒め言葉を日本語で生成してください。
 
-        対象者の情報:
         - 年齢: ${formData.age || "不明"}
         - 性別: ${formData.gender || "不明"}
         - 関係性: ${formData.relationship || "不明"}
+        - 褒めたい理由: ${formData.motivation || "不明"}
+        - 趣味: ${formData.hobby || "不明"}
+        - その人との距離感: ${formData.distance || "不明"}
+        - 性格: ${formData.character || "不明"}
+        - 得意なこと、または苦手なこと: ${formData.worksornot || "不明"}
+        - 職業/学年: ${formData.position || "不明"}
         - その他の特徴: ${formData.other || "特になし"}
         
         以下の点を考慮して褒め言葉を作成してください:

@@ -6,6 +6,7 @@ import {useDropzone} from "react-dropzone"
 import {Button} from "@/components/ui/button"
 import {Card, CardContent} from "@/components/ui/card"
 import {askWithImage} from "@/lib/gemini";
+import Image from "next/image";
 
 export function ImagePraiseForm() {
     const [imageFile, setImageFile] = useState<File | null>(null);
@@ -59,7 +60,13 @@ export function ImagePraiseForm() {
 
                 {/* Main Title */}
                 <div className="text-center mb-8">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">ほめちゃる（画像版）</h2>
+                    <Image
+                        src="/homecharu.png"
+                        alt="ほめちゃるロゴ"
+                        width={200}
+                        height={200}
+                        className="mx-auto mb-4"
+                    />
                     <p className="text-lg text-gray-600">画像に写った人物に対して、心のこもった褒め言葉を生成します</p>
                 </div>
 
