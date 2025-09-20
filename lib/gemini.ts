@@ -58,7 +58,6 @@ export async function askWithImage(files: File[]): Promise<string> {
         })
     )
 
-
     const prompt = `あなたは人を褒めることに特化したAIアシスタントです。以下の画像に写っている人物の外見や雰囲気をもとに、心のこもった自然な褒め言葉を日本語で生成してください。
 
         以下の点を考慮して褒め言葉を作成してください:
