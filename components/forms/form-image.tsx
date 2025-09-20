@@ -9,8 +9,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { askWithImage } from "@/lib/gemini"
 import Image from "next/image";
 
-const MAX_PREVIEW_COUNT = 3
-
 export function ImagePraiseForm() {
     const [imageFiles, setImageFiles] = useState<File[]>([])
     const [previewUrls, setPreviewUrls] = useState<string[]>([])
