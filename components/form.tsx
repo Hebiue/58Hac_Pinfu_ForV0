@@ -225,24 +225,26 @@ export function PraiseForm() {
                               />
                           </div>
 
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                              画像
-                          </label>
-                          <div
-                              {...getRootProps()}
-                              className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${
-                                  isDragActive ? "border-green-400 bg-green-50" : "border-gray-300 bg-white"
-                              }`}
-                          >
-                              <input {...getInputProps()} />
-                              <p className="text-gray-700">
-                                  ここに画像をドラッグ＆ドロップ、またはクリックして選択（複数枚可）
-                              </p>
-                              {imageFiles.length > 0 && (
-                                  <p className="mt-2 text-sm text-green-600">
-                                      現在の画像: {imageFiles.length}枚
+                          <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                  画像
+                              </label>
+                              <div
+                                  {...getRootProps()}
+                                  className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${
+                                      isDragActive ? "border-green-400 bg-green-50" : "border-gray-300 bg-white"
+                                  }`}
+                              >
+                                  <input {...getInputProps()} />
+                                  <p className="text-gray-700">
+                                      ここに画像をドラッグ＆ドロップ、またはクリックして選択（複数枚可）
                                   </p>
-                              )}
+                                  {imageFiles.length > 0 && (
+                                      <p className="mt-2 text-sm text-green-600">
+                                          現在の画像: {imageFiles.length}枚
+                                      </p>
+                                  )}
+                              </div>
                           </div>
 
                           {/* Image Previews */}
