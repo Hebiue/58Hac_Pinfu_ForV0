@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start"
+    "build": "next build --dotenv .env",
+    "dev": "next dev --dotenv .env",
+    "lint": "next lint --dotenv .env",
+    "start": "next start --dotenv .env"
   },
   "dependencies": {
     "@google/generative-ai": "^0.5.0",
     "@hookform/resolvers": "^3.10.0",
+    "@next/env": "^15.5.3",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-aspect-ratio": "1.1.1",

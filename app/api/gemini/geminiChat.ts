@@ -1,4 +1,5 @@
 import { genAI } from "./geminiClient";
+import {getEnvConfig} from "@/utils/envConfig";
 
 export interface Target {
     age: string;
@@ -8,7 +9,7 @@ export interface Target {
 }
 
 export class Chat {
-    private model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    private model = genAI.getGenerativeModel({ model: getEnvConfig().model });
 
     async ask(formData: Target): Promise<string> {
         const prompt = `あなたは人を褒めることに特化したAIアシスタントです。以下の情報を基に、心のこもった自然な褒め言葉を日本語で生成してください。
