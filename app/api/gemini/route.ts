@@ -1,5 +1,7 @@
-import {genAI} from "./geminiClient"
 import {getEnvConfig} from "@/utils/envConfig"
+import {GoogleGenerativeAI} from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(getEnvConfig().geminiApiKey);
 
 export interface Target {
     age: string;
