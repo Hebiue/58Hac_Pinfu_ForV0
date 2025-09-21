@@ -240,7 +240,7 @@ export function PraiseForm() {
 
                           <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
-                                  画像
+                                  褒めたい人の画像
                               </label>
                               <div
                                   {...getRootProps()}
