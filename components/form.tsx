@@ -316,7 +316,7 @@ export function PraiseForm() {
               {/* Footer */}
               <div className="text-center mt-8 text-sm text-gray-600 leading-relaxed">
                   <p>
-                      ほめちゃる（仮）は人を褒めること、褒め方を学ぶことに特化したAIです。その人の特徴、趣味、自分との関係を入力してください。
+                      ほめちゃるは人を褒めること、褒め方を学ぶことに特化したAIです。その人の特徴、趣味、自分との関係を入力してください。
                       <br />
                   </p>
               </div>
